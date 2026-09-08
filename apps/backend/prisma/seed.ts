@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { pbkdf2Sync, randomBytes } from "node:crypto";
 
 const prisma = new PrismaClient();
 const SUBJECT_ID = "00000000-0000-4000-8000-000000000001";
@@ -7,10 +8,42 @@ const TOPIC_DS_ID = "00000000-0000-4000-8000-000000000012";
 const MCQ_ID = "00000000-0000-4000-8000-000000000101";
 const MSQ_ID = "00000000-0000-4000-8000-000000000102";
 const NAT_ID = "00000000-0000-4000-8000-000000000103";
+const DEV_USER_ID = "00000000-0000-4000-8000-0000000000aa";
+const DEV_USER_EMAIL = "dev-seed@gate-pyq.local";
+
+// PBKDF2 hashing compatible with core/utils/crypto (config defaults: 310000 iters, sha512, 64-byte key).
+function hashPassword(password: string): string {
+  const iterations = 310_000;
+  const keyLength = 64;
+  const salt = randomBytes(16).toString("hex");
+  const derived = pbkdf2Sync(password, salt, iterations, keyLength, "sha512");
+  return `pbkdf2$${iterations}$${salt}$${derived.toString("hex")}`;
+}
 
 async function main(): Promise<void> {
-  const creator = await prisma.user.findFirst({ orderBy: { createdAt: "asc" } });
-  if (!creator) throw new Error("A user is required before seeding question content.");
+  // RBAC reference data (Phase 4 §5): roles must exist for the dev user + registrations.
+  for (const { code, name } of [
+    { code: "student", name: "Student" },
+    { code: "moderator", name: "Moderator" },
+    { code: "admin", name: "Administrator" },
+  ]) {
+    await prisma.role.upsert({ where: { code }, update: {}, create: { code, name, isActive: true } });
+  }
+
+  // Self-contained creator: find-or-create a fixed development user as question author/reviewer.
+  const studentRole = await prisma.role.findUniqueOrThrow({ where: { code: "student" } });
+  const creator = await prisma.user.upsert({
+    where: { id: DEV_USER_ID },
+    update: { roleId: studentRole.id, status: "active", deletedAt: null },
+    create: {
+      id: DEV_USER_ID,
+      email: DEV_USER_EMAIL,
+      passwordHash: hashPassword("dev-passw0rd-1"),
+      roleId: studentRole.id,
+      fullName: "Development Seeder",
+      status: "active",
+    },
+  });
 
   const subject = await prisma.subject.upsert({
     where: { id: SUBJECT_ID },
@@ -33,14 +66,6 @@ async function main(): Promise<void> {
   const natType = await prisma.questionType.upsert({ where: { code: "nat" }, update: {}, create: { code: "nat", name: "Numerical Answer", hasOptions: false, hasNumeric: true, supportsMultiple: false } });
   for (const mode of ["subject", "topic", "year", "difficulty", "mistake", "custom"]) {
     await prisma.practiceMode.upsert({ where: { code: mode }, update: {}, create: { code: mode, name: mode[0].toUpperCase() + mode.slice(1) } });
-  }
-  // RBAC reference data (Phase 4 §5): roles must exist for registration and admin gates.
-  for (const { code, name } of [
-    { code: "student", name: "Student" },
-    { code: "moderator", name: "Moderator" },
-    { code: "admin", name: "Administrator" },
-  ]) {
-    await prisma.role.upsert({ where: { code }, update: {}, create: { code, name, isActive: true } });
   }
   const questions = [
     { id: MCQ_ID, typeId: mcqType.id, topicId: algorithmTopic.id, code: "MCQ", body: "[DEV DATA] Which traversal visits a binary search tree in sorted order?", explanation: "In-order traversal visits left subtree, root, then right subtree.", marks: 1, negativeMarks: 0.25, options: [{ id: "00000000-0000-4000-8000-000000000201", body: "In-order", isCorrect: true, sortOrder: 0 }, { id: "00000000-0000-4000-8000-000000000202", body: "Pre-order", isCorrect: false, sortOrder: 1 }, { id: "00000000-0000-4000-8000-000000000203", body: "Post-order", isCorrect: false, sortOrder: 2 }] },
