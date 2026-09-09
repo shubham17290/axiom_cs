@@ -170,15 +170,17 @@ model QuestionType {
 }
 
 model QuestionSource {
-  id          String  @id @default(uuid(7)) @map("id")
-  name        String  @unique(map: "uq_question_sources_name") @map("name")
-  examYear    Int     @map("exam_year")
-  paperNumber String? @map("paper_number")
-  shift       String? @map("shift")
-  isActive    Boolean @default(true) @map("is_active")
+  id            String  @id @default(uuid(7)) @map("id")
+  name          String  @unique(map: "uq_question_sources_name") @map("name")
+  examYear      Int     @map("exam_year")
+  paperNumber   String? @map("paper_number")
+  shift         String? @map("shift")
+  questionNumber Int?   @map("question_number")
+  isActive      Boolean @default(true) @map("is_active")
 
   questions Question[]
 
+  @@unique([examYear, paperNumber, shift, questionNumber], map: "uq_question_sources_identity")
   @@map("question_sources")
 }
 

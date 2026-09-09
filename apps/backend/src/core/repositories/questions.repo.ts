@@ -1,5 +1,5 @@
 // PHASE 8 — Questions, versions, sources data access (Phase 3 §6.9–6.14)
-import { Prisma } from "@prisma/client";
+import { Prisma, Question } from "@prisma/client";
 import { prisma } from "./prisma";
 
 export interface QuestionFilters {
@@ -8,6 +8,8 @@ export interface QuestionFilters {
   year?: number;
   difficulty?: string;
   typeCode?: string;
+  questionNumber?: number;
+  sourceId?: string;
 }
 
 function publishedWhere(filters: QuestionFilters): Prisma.QuestionWhereInput {
@@ -17,6 +19,8 @@ function publishedWhere(filters: QuestionFilters): Prisma.QuestionWhereInput {
   if (filters.year !== undefined) where.gateYear = filters.year;
   if (filters.difficulty) where.difficulty = filters.difficulty;
   if (filters.typeCode) where.questionType = { code: filters.typeCode };
+  if (filters.questionNumber !== undefined) where.source = { questionNumber: filters.questionNumber };
+  if (filters.sourceId) where.sourceId = filters.sourceId;
   return where;
 }
 
@@ -82,6 +86,7 @@ export interface QuestionDetail {
   subject: { id: string; code: string; name: string };
   topic: { id: string; name: string } | null;
   questionType: { code: string; name: string };
+  source: { id: string; examYear: number; paperNumber: string | null; shift: string | null; questionNumber: number | null } | null;
 }
 
 export async function findQuestionById(id: string) {
@@ -164,6 +169,7 @@ export interface QuestionWriteInput {
   difficulty: string;
   gateYear: number;
   sourceId?: string | null;
+  questionNumber?: number | null;
   options?: OptionWrite[];
   numericAnswers?: NumericAnswerWrite[];
 }
@@ -209,23 +215,53 @@ export async function createQuestion(
   createdById: string,
 ): Promise<{ id: string }> {
   const content = replaceContentData(input);
-  return prisma.question.create({
-    data: {
-      questionTypeId: typeId,
-      subjectId: input.subjectId,
-      topicId: input.topicId ?? null,
-      body: input.body,
-      explanation: input.explanation ?? null,
-      marks: input.marks,
-      negativeMarks: input.negativeMarks ?? null,
-      difficulty: input.difficulty,
-      gateYear: input.gateYear,
-      sourceId: input.sourceId ?? null,
-      createdById,
-      options: { create: content.options },
-      numericAnswers: { create: content.numericAnswers },
+  return prisma.$transaction(async (tx) => {
+    if (input.sourceId && input.questionNumber !== undefined) {
+      await tx.questionSource.update({
+        where: { id: input.sourceId },
+        data: { questionNumber: input.questionNumber },
+      });
+    }
+    const question = await tx.question.create({
+      data: {
+        questionTypeId: typeId,
+        subjectId: input.subjectId,
+        topicId: input.topicId ?? null,
+        body: input.body,
+        explanation: input.explanation ?? null,
+        marks: input.marks,
+        negativeMarks: input.negativeMarks ?? null,
+        difficulty: input.difficulty,
+        gateYear: input.gateYear,
+        sourceId: input.sourceId ?? null,
+        createdById,
+        options: { create: content.options },
+        numericAnswers: { create: content.numericAnswers },
+      },
+      select: { id: true },
+    });
+    return question;
+  });
+}
+
+export async function findQuestionBySourceIdentity(
+  examYear: number,
+  paperNumber: string | null,
+  shift: string | null,
+  questionNumber: number | null,
+): Promise<Question | null> {
+  if (examYear === undefined || questionNumber === undefined || questionNumber === null) return null;
+  return prisma.question.findFirst({
+    where: {
+      gateYear: examYear,
+      source: {
+        examYear,
+        paperNumber,
+        shift,
+        questionNumber,
+      },
     },
-    select: { id: true },
+    select: { id: true, difficulty: true, status: true, createdAt: true, updatedAt: true, subjectId: true, topicId: true, body: true, explanation: true, marks: true, negativeMarks: true, version: true, gateYear: true, createdById: true, reviewedById: true, questionTypeId: true, sourceId: true },
   });
 }
 
@@ -241,6 +277,9 @@ export async function updateQuestion(id: string, patch: Partial<QuestionWriteInp
   if (patch.difficulty !== undefined) data.difficulty = patch.difficulty;
   if (patch.gateYear !== undefined) data.gateYear = patch.gateYear;
   if (patch.sourceId !== undefined) data.source = patch.sourceId === null ? { disconnect: true } : { connect: { id: patch.sourceId } };
+  if (patch.questionNumber !== undefined && patch.sourceId) {
+    data.source = patch.sourceId === null ? { disconnect: true } : { connect: { id: patch.sourceId } };
+  }
 
   await prisma.$transaction(async (tx) => {
     const updated = await tx.question.update({ where: { id }, data, select: { id: true } });
@@ -288,6 +327,8 @@ export interface PublishSnapshot {
   gate_year: number;
   subject_id: string;
   topic_id: string | null;
+  question_number: number | null;
+  source_id: string | null;
   options: Array<{ id: string; body: string; is_correct: boolean }>;
   numeric_answers: Array<{
     numeric_value: string;
@@ -312,6 +353,7 @@ export async function publishQuestion(
       include: {
         options: { orderBy: { sortOrder: "asc" }, select: { id: true, body: true, isCorrect: true } },
         numericAnswers: true,
+        source: { select: { id: true, examYear: true, paperNumber: true, shift: true, questionNumber: true } },
       },
     });
     if (!question) throw new Error("QUESTION_NOT_FOUND");
@@ -328,6 +370,8 @@ export async function publishQuestion(
       gate_year: question.gateYear,
       subject_id: question.subjectId,
       topic_id: question.topicId,
+      question_number: question.source ? question.source.questionNumber : null,
+      source_id: question.sourceId,
       options: question.options.map((option) => ({
         id: option.id,
         body: option.body,

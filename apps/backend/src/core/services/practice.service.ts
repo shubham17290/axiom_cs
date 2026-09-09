@@ -330,12 +330,11 @@ export async function getResult(sessionId: string, userId: string): Promise<Resu
 }
 
 async function buildResult(session: SessionRow, rows: Awaited<ReturnType<typeof practiceRepo.attemptsForSessionWithTopics>>): Promise<ResultPayload> {
-  const parsed = practiceRepo.parseSessionConfig(session.config);
-  const poolIds = parsed.pool ?? [];
 
   const correct = rows.filter((row) => row.isCorrect).length;
   const negative = rows.reduce((total, row) => total + (Number(row.marks) < 0 ? Math.abs(Number(row.marks)) : 0), 0);
-  const maxMarks = await practiceRepo.sumMarksForQuestions(poolIds);
+  const versionIds = rows.map((row) => row.questionVersionId);
+  const maxMarks = await practiceRepo.sumMarksForQuestionVersions(versionIds);
 
   const perTopic = new Map<string | null, { attempted: number; correct: number }>();
   const mistakes: string[] = [];

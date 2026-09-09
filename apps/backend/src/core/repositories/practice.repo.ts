@@ -188,7 +188,20 @@ export async function attemptsForSessionWithTopics(sessionId: string) {
   });
 }
 
-/** Max marks over the session pool (current authored marks per question). */
+/** Max marks over the session pool using the marks from the question versions used by attempts. */
+export async function sumMarksForQuestionVersions(versionIds: string[]): Promise<number> {
+  if (versionIds.length === 0) return 0;
+  const rows = await prisma.questionVersion.findMany({
+    where: { id: { in: versionIds } },
+    select: { snapshot: true },
+  });
+  return rows.reduce((total, row) => {
+    const snap = row.snapshot as { marks?: number } | null;
+    return total + (snap?.marks ?? 0);
+  }, 0);
+}
+
+/** Max marks over the session pool using current authored marks per question (fallback). */
 export async function sumMarksForQuestions(questionIds: string[]): Promise<number> {
   if (questionIds.length === 0) return 0;
   const rows = await prisma.question.findMany({

@@ -33,7 +33,7 @@ questionsRouter.get(
   requireAuth,
   asyncHandler(async (req, res) => {
     const v = new Validator(req.query);
-    v.strictKeys(["subject_id", "topic_id", "year", "difficulty", "type", "page", "page_size", "sort", "include_answer"]);
+    v.strictKeys(["subject_id", "topic_id", "year", "difficulty", "type", "page", "page_size", "sort", "include_answer", "question_number", "source_id"]);
     const subjectId = v.uuid("subject_id");
     const topicId = v.uuid("topic_id");
     const year = v.int("year", { min: 1990 });
@@ -41,24 +41,28 @@ questionsRouter.get(
     const typeCode = v.enumOf("type", QUESTION_TYPE_CODES);
     const sort = v.string("sort", { max: 16 });
     const includeAnswer = req.query["include_answer"] === "true" ? true : req.query["include_answer"] === undefined ? undefined : false;
+    const questionNumber = v.int("question_number", { min: 1 });
+    const sourceId = v.uuid("source_id");
     v.finish();
     if (includeAnswer === true && req.principal?.roleCode !== "admin") {
       throw errors.role("Answer reveal is restricted to admins.");
     }
 
     const query = pageParams(req.query["page"], req.query["page_size"]);
-    const { items, total } = await listPublishedQuestions(
-      {
-        ...(subjectId ? { subjectId } : {}),
-        ...(topicId ? { topicId } : {}),
-        ...(year !== undefined ? { year } : {}),
-        ...(difficulty ? { difficulty } : {}),
-        ...(typeCode ? { typeCode } : {}),
-      },
-      query.page,
-      query.pageSize,
-      buildOrderBy(sort),
-    );
+     const { items, total } = await listPublishedQuestions(
+       {
+         ...(subjectId ? { subjectId } : {}),
+         ...(topicId ? { topicId } : {}),
+         ...(year !== undefined ? { year } : {}),
+         ...(difficulty ? { difficulty } : {}),
+         ...(typeCode ? { typeCode } : {}),
+         ...(questionNumber !== undefined ? { questionNumber } : {}),
+         ...(sourceId ? { sourceId } : {}),
+       },
+       query.page,
+       query.pageSize,
+       buildOrderBy(sort),
+     );
 
     const base = items.map(publicQuestionView);
     if (includeAnswer === true) {

@@ -184,6 +184,12 @@ export async function validateQuestionInput(
       details.push({ field: "gate_year", code: "VALIDATION_OUT_OF_RANGE", message: `"gate_year" must be between 1990 and ${currentYearPlusOne()}.` });
     }
   }
+  if (raw["question_number"] !== undefined && raw["question_number"] !== null) {
+    const qn = Number(raw["question_number"]);
+    if (!Number.isInteger(qn) || qn < 1) {
+      details.push({ field: "question_number", code: "VALIDATION_INVALID_QUESTION_NUMBER", message: '"question_number" must be a positive integer.' });
+    }
+  }
   if (raw["difficulty"] !== undefined && !["easy", "medium", "hard"].includes(String(raw["difficulty"]))) {
     details.push({ field: "difficulty", code: "VALIDATION_INVALID_VALUE", message: '"difficulty" must be easy, medium or hard.' });
   }
@@ -271,6 +277,7 @@ export async function validateQuestionInput(
     difficulty: String(raw["difficulty"] ?? "medium"),
     gateYear: Number(raw["gate_year"]),
     sourceId: (raw["source_id"] as string | undefined | null) ?? null,
+    questionNumber: raw["question_number"] !== undefined && raw["question_number"] !== null ? Number(raw["question_number"]) : undefined,
     options: parsedOptions,
     numericAnswers: parsedNumericAnswers,
   };
@@ -296,6 +303,24 @@ async function assertActiveTaxonomy(subjectId: string, topicId?: string | null):
 export async function createQuestionValidated(actorId: string, rawBody: Record<string, unknown>) {
   const input = await validateQuestionInput(rawBody, "create");
   await assertActiveTaxonomy(input.subjectId, input.topicId);
+
+  if (input.sourceId && input.questionNumber !== undefined) {
+    const { prisma } = await import("../repositories/prisma");
+    const source = await prisma.questionSource.findUnique({
+      where: { id: input.sourceId },
+      select: { paperNumber: true, shift: true },
+    });
+    const existing = await questionsRepo.findQuestionBySourceIdentity(
+      input.gateYear,
+      source?.paperNumber ?? null,
+      source?.shift ?? null,
+      input.questionNumber,
+    );
+    if (existing) {
+      throw errors.conflict("CONFLICT_DUPLICATE_QUESTION", "A question with this GATE source identity already exists.");
+    }
+  }
+
   const type = await ensureQuestionType(input.typeCode);
   const created = await questionsRepo.createQuestion(input, type.id, actorId);
   await writeAuditEntry({ actorId, action: "question.create", entityType: "questions", entityId: created.id });
@@ -363,10 +388,34 @@ export interface ImportReport {
 export async function importQuestions(actorId: string, items: Array<Record<string, unknown>>): Promise<ImportReport> {
   const report: ImportReport = { imported: 0, failed: 0, errors: [] };
   const valid: Array<{ input: QuestionWriteInput; typeId: string }> = [];
+  const { prisma } = await import("../repositories/prisma");
   for (let index = 0; index < items.length; index += 1) {
     try {
       const input = await validateQuestionInput(items[index], "create");
       await assertActiveTaxonomy(input.subjectId, input.topicId);
+
+      if (input.sourceId && input.questionNumber !== undefined) {
+        const source = await prisma.questionSource.findUnique({
+          where: { id: input.sourceId },
+          select: { paperNumber: true, shift: true },
+        });
+        const existing = await questionsRepo.findQuestionBySourceIdentity(
+          input.gateYear,
+          source?.paperNumber ?? null,
+          source?.shift ?? null,
+          input.questionNumber,
+        );
+        if (existing) {
+          report.failed += 1;
+          report.errors.push({
+            index,
+            code: "CONFLICT_DUPLICATE_QUESTION",
+            message: `A question with GATE source identity (exam_year: ${input.gateYear}, paper_number: ${source?.paperNumber ?? "null"}, shift: ${source?.shift ?? "null"}, question_number: ${input.questionNumber}) already exists.`,
+          });
+          continue;
+        }
+      }
+
       valid.push({ input, typeId: (await ensureQuestionType(input.typeCode)).id });
     } catch (error) {
       report.failed += 1;
