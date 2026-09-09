@@ -16,6 +16,7 @@ Monorepo foundation for a full-stack web application that helps **GATE CS & IT a
 .
 ├── apps/
 │   ├── backend/          # Express + TypeScript + Prisma (Phase 4 architecture)
+│   │   └── data/raw/     # Immutable raw GATE CS PYQ PDFs (parser/ingestion inputs)
 │   └── frontend/         # Next.js (React) + TypeScript + Tailwind CSS (Phase 5)
 ├── docs/                 # Approved design documents (Phases 0–5)
 ├── package.json          # npm workspaces root
