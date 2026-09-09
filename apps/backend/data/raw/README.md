@@ -2,7 +2,7 @@
 
 This directory holds **unprocessed** source materials for the GATE CS & IT
 question bank. Files here are inputs to the question-parsing/ingestion
-pipeline (not yet implemented) and should be treated as immutable reference
+pipeline (not yet implemented) and should be treated  as immutable reference
 data — never edit the PDFs in place.
 
 ## Layout
