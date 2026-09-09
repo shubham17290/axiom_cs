@@ -1,0 +1,1187 @@
+{
+  "source": {
+    "file": "2023_CS.pdf",
+    "exam_year": 2023,
+    "paper_number": null,
+    "shift": null
+  },
+  "questions": [
+    {
+      "question_number": 1,
+      "type": "nat",
+      "body": "We reached the station late, and _______ missed the train.",
+      "options": [
+        {
+          "label": "A",
+          "body": "near",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "nearly",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "utterly",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "mostly",
+          "is_correct": null
+        }
+      ],
+      "answer": {
+        "type": "numeric",
+        "value": null,
+        "raw_text": "[blank]"
+      },
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 2,
+      "type": "nat",
+      "body": "Kind : _______ : : Often : Frequently\n(By word meaning)",
+      "options": [
+        {
+          "label": "A",
+          "body": "Mean",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Type",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Cruel",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Kindly",
+          "is_correct": null
+        }
+      ],
+      "answer": {
+        "type": "numeric",
+        "value": null,
+        "raw_text": "[blank]"
+      },
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 3,
+      "type": "mcq",
+      "body": "A series of natural numbers 𝐹1, 𝐹2, 𝐹3, 𝐹4, 𝐹5, 𝐹6, 𝐹7, … obeys 𝐹𝑛+1 = 𝐹𝑛 + 𝐹𝑛−1\nfor all integers 𝑛 ≥ 2 .\nIf 𝐹6 = 37, and 𝐹7 = 60, then what is 𝐹1 ?",
+      "options": [
+        {
+          "label": "A",
+          "body": "4",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "5",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "8",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "9",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 4,
+      "type": "mcq",
+      "body": "A survey for a certain year found that 90% of pregnant women received medical\ncare at least once before giving birth. Of these women, 60% received medical care\nfrom doctors, while 40% received medical care from other healthcare providers.\nGiven this information, which one of the following statements can be inferred with\ncertainty?",
+      "options": [
+        {
+          "label": "A",
+          "body": "More than half of the pregnant women received medical care at least once from a",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Less than half of the pregnant women received medical care at least once from a",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "More than half of the pregnant women received medical care at most once from a",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Less than half of the pregnant women received medical care at most once from a",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 5,
+      "type": "mcq",
+      "body": "Looking at the surface of a smooth 3-dimensional object from the outside, which\none of the following options is TRUE?",
+      "options": [
+        {
+          "label": "A",
+          "body": "The surface of the object must be concave everywhere.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "The surface of the object must be convex everywhere.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "The surface of the object may be concave in some places and convex in other places.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "The object can have edges, but no corners.",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 6,
+      "type": "unknown",
+      "body": "– Q.10 Carry TWO marks Each",
+      "options": [],
+      "answer": null,
+      "marks": 2,
+      "negative_marks": null,
+      "warnings": [
+        "Could not determine question type (MCQ/MSQ/NAT)"
+      ]
+    },
+    {
+      "question_number": 6,
+      "type": "mcq",
+      "body": "The country of Zombieland is in distress since more than 75% of its working\npopulation is suffering from serious health issues. Studies conducted by competent\nhealth experts concluded that a complete lack of physical exercise among its\nworking population was one of the leading causes of their health issues. As one of\nthe measures to address the problem, the Government of Zombieland has decided\nto provide monetary incentives to those who ride bicycles to work.\nBased only on the information provided above, which one of the following\nstatements can be logically inferred with certainty?",
+      "options": [
+        {
+          "label": "A",
+          "body": "All the working population of Zombieland will henceforth ride bicycles to work.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Riding bicycles will ensure that all of the working population of Zombieland is free",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "The health experts suggested to the Government of Zombieland to declare riding",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "The Government of Zombieland believes that riding bicycles is a form of physical",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text",
+        "DUPLICATE: Same source identity as question at index 5"
+      ]
+    },
+    {
+      "question_number": 7,
+      "type": "mcq",
+      "body": "Consider two functions of time (𝑡),\n𝑓(𝑡) = 0.01 𝑡2\n𝑔(𝑡) = 4 𝑡\nwhere 0 < 𝑡 < ∞.\nNow consider the following two statements:\n(i) For some 𝑡 > 0, 𝑔(𝑡) > 𝑓(𝑡).\n(ii) There exists a 𝑇, such that 𝑓(𝑡) > 𝑔(𝑡) for all 𝑡 > 𝑇.\nWhich one of the following options is TRUE?",
+      "options": [
+        {
+          "label": "A",
+          "body": "only (i) is correct",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "only (ii) is correct",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "both (i) and (ii) are correct",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "neither (i) nor (ii) is correct",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 8,
+      "type": "mcq",
+      "body": "Which one of the following sentence sequences creates a coherent narrative?\n(i) Once on the terrace, on her way to her small room in the corner, she\nnotices the man right away.\n(ii) She begins to pant by the time she has climbed all the stairs.\n(iii) Mina has bought vegetables and rice at the market, so her bags are\nheavy.\n(iv) He was leaning against the parapet, watching the traffic below.",
+      "options": [
+        {
+          "label": "A",
+          "body": "(i), (ii), (iv), (iii)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "(ii), (iii), (i), (iv)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "(iv), (ii), (i), (iii)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "(iii), (ii), (i), (iv)",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 9,
+      "type": "mcq",
+      "body": "( )\t\nf x\t and\t( )\t\ng y\t are functions of x and y, respectively, and\t( ) \t( )\t\nf x g y\t=\t for all real\nvalues of 𝑥 and 𝑦. Which one of the following options is necessarily TRUE for all\nx and y?",
+      "options": [
+        {
+          "label": "A",
+          "body": "( )",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "( ) ( )",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "( )",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "( ) ( ) ( ) ( )",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 10,
+      "type": "mcq",
+      "body": "Which one of the options best describes the transformation of the 2-dimensional\nfigure P to Q, and then to R, as shown?",
+      "options": [
+        {
+          "label": "A",
+          "body": "Operation 1: A clockwise rotation by 90º about an axis perpendicular to the plane",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Operation 1: A counter clockwise rotation by 90º about an axis perpendicular to",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Operation 1: A clockwise rotation by 90º about an axis perpendicular to the plane",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Operation 1: A counter clockwise rotation by 180º about an axis perpendicular to",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Only S1 is TRUE.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Only S1 and S2 are TRUE.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "S1, S2, and S3 are all TRUE.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Only S1 and S3 are TRUE.",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": null,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text",
+        "Marks not specified in question text"
+      ]
+    },
+    {
+      "question_number": 11,
+      "type": "msq",
+      "body": "– Q.35 Carry ONE mark each.\nQ.11\n\n-- 8 of 69 --\n\nWhich one of the following sequences when stored in an array at locations\nA[1], . . . , A[10] forms a max-heap?",
+      "options": [
+        {
+          "label": "A",
+          "body": "23, 17, 10, 6, 13, 14, 1, 5, 7, 12",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "23, 17, 14, 7, 13, 10, 1, 5, 6, 12",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "23, 17, 14, 6, 13, 10, 1, 5, 7, 15",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "23, 14, 17, 1, 10, 13, 16, 12, 7, 5",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "SLLdel is O(1) and DLLdel is O(n)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Both SLLdel and DLLdel are O(log(n))",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Both SLLdel and DLLdel are O(1)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "SLLdel is O(n) and DLLdel is O(1)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "1(0∗11)∗",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "0(0 + 1)∗",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "1(0 + 11)∗",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "1(110∗)∗",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Ln =",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Ln =",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Ln =",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Ln =",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Number of attributes of its relation schema.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Number of tuples stored in the relation.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Number of entries in the relation.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Number of distinct domains of its relation schema.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Longer link length and lower transmission rate",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Longer link length and higher transmission rate",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Shorter link length and lower transmission rate",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Shorter link length and higher transmission rate",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "=",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "=",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "and det(B) denote the determinants of the matrices A and B,",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "det(A) = det(B)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "det(B) = −det(A)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "det(A) = 0",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "det(AB) = det(A) + det(B)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Division method, i.e., use the hash function h(k) = k \tmod m.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Multiplication method, i.e., use the hash function h(k) = \u0005m(kA − \u0005kA\u0006)\u0006, where",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "is a carefully chosen constant.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Universal hashing method.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "If k is a prime number, use Division method. Otherwise, use Multiplication method.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "D Flip-flop",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "D Latch",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Half-adder",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Demultiplexer",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Page table base register",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Stack pointer",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Program counter",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "General purpose registers",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Function Call",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "malloc Call",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Page Fault",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "System Call",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "The intersection of two regular languages is regular.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "The intersection of two context-free languages is context-free.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "The intersection of two recursive languages is recursive.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "The intersection of two recursively enumerable languages is recursively enumerable.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "OSPF implements Bellman-Ford algorithm to find shortest paths.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "OSPF uses Dijkstra’s shortest path algorithm to implement least-cost path routing.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "OSPF is used as an inter-domain routing protocol.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "OSPF implements hierarchical routing.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "∃x",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "∀x∀yQ(x, y)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "∃y∀x",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "∃x",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "First-in First-Out",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Round Robin",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Priority Scheduling",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Shortest Job First",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "f (x) does not have a local maximum.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "f (x) has a local maximum.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "f (x) does not have a local minimum.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "f (x) has a local minimum.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "f ∈ O(g)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "f ∈ Ω(g)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "f ∈ o(g)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "f ∈ Θ(g)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "particular number is written as 132 in radix-4 representation. The same number",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "keyboard connected to a computer is used at a rate of 1 keystroke per second.",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": 1,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text"
+      ]
+    },
+    {
+      "question_number": 36,
+      "type": "mcq",
+      "body": "– Q.65 Carry TWO mark each.\n\n-- 34 of 69 --\n\nConsider the following program:\nint main()\n{\nf1();\nf2(2);\nf3();\nreturn(0);\n}\nint f1()\n{\nreturn(1);\n}\nint f2(int X)\n{\nf3();\nif (X==1)\nreturn f1();\nelse\nreturn (X*f2(X-1));\n}\nint f3()\n{\nreturn(5);\n}\nWhich one of the following options represents the activation tree corresponding to\nthe main function?",
+      "options": [
+        {
+          "label": "A",
+          "body": "B1: {}, B2: {a}, B3: {a}, B4: {a}",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "B1: {i, j}, B2: {a}, B3: {a}, B4: {i}",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "B1: {a, i, j}, B2: {a, i, j}, B3: {a, i}, B4: {a}",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "B1: {a, i, j}, B2: {a, j}, B3: {a, j}, B4: {a, i, j}",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "15, 7",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "7, 7",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "12, 7",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "12, 8",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "The language generated by G is (a + b)∗",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "The language generated by G is a∗(a + b)b∗",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "The language generated by G is a∗b∗(a + b)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "The language generated by G is not a regular language",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "{ambn | 1 ≤ m and n < m}",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "{ambn | 0 ≤ n ≤ m}",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "{ambn | 0 ≤ m and \t0 ≤ n}",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "{am | 0 ≤ m} ∪ {bn | 0 ≤ n}",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "(8, 4, 1, L02)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "(3, 4, 4, L01)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "(8, 1, 1, L02)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "(3, 1, 1, L01)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "4 kilobyte (KB) byte-addressable memory is realized using four 1 KB memory",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "(0, 1, 2, 3)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "(0, 1024, 2048, 3072)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "(0, 8, 16, 24)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "(0, 0, 0, 0)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "(0, 0, 1)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "(1, 0, 0)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "(1, 0, 1)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "(1, 1, 1)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Boolean digital circuit is composed using two 4-input multiplexers (M1 and M2)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "(1, 1, 0, 0, 1, 1, 1, 0)",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "(1, 1, 0, 0, 1, 1, 0, 1)",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "(1, 1, 0, 1, 1, 1, 0, 0)",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "(0, 0, 1, 1, 0, 1, 1, 1)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "0x404C2EF4",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "0x405C2EF4",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "0xC15C2EF4",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "0xC14C2EF4",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "Both Extract-Max(A) and Insert(A,key) run in O(1).",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Both Extract-Max(A) and Insert(A,key) run in O(log(n)).",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "Extract-Max(A) runs in O(1) whereas Insert(A,key) runs in O(n).",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Extract-Max(A) runs in O(1) whereas Insert(A,key) runs in O(log(n)).",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "3 8 5 13 11 10",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "3 5 8 10 11 13",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "3 8 16 13 24 50",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "3 16 8 50 24 13",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "n!",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "2",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "F is NOT well-defined.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "F is an onto (or surjective) function.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "F is a one-to-one (or injective) function.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "F is a bijective function.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "30 bits",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "32 bits",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "34 bits",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "36 bits",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "H is a group.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "Every element in H has an inverse, but H is NOT a group.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "For every A ∈ 2X , the inverse of A is the complement of A.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "For every A ∈ 2X , the inverse of A is A.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "7 RTTs, in case of non-persistent HTTP with 5 parallel TCP connections.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "5 RTTs, in case of persistent HTTP with pipelining.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "9 RTTs, in case of non-persistent HTTP with 5 parallel TCP connections.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "6 RTTs, in case of persistent HTTP with pipelining.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "A and B are independent.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "A and C are independent.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "B and C are independent.",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "Prob(B|C) = Prob(B)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "f1(n) ∈ Θ(f2(n))",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "f1(n) ∈ o(f2(n))",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "f1(n) ∈ ω(f2(n))",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "f1(n) ∈ O(n)",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "This procedure results in a proper vertex coloring of G.",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "The number of colors used is at most Δ(G) + 1.",
+          "is_correct": null
+        },
+        {
+          "label": "C",
+          "body": "The number of colors used is at most Δ(G).",
+          "is_correct": null
+        },
+        {
+          "label": "D",
+          "body": "The number of colors used is equal to the chromatic number of G.",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": ".",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "→ \t0 \tB.val = 0.val",
+          "is_correct": null
+        },
+        {
+          "label": "B",
+          "body": "→ \t1 \tB.val = 1.val",
+          "is_correct": null
+        },
+        {
+          "label": "A",
+          "body": "packet addressed to a destination address 200.150.68.118 arrives at the router.",
+          "is_correct": null
+        }
+      ],
+      "answer": null,
+      "marks": 2,
+      "negative_marks": null,
+      "warnings": [
+        "No answer found in extracted text"
+      ]
+    }
+  ],
+  "generated_at": "2026-09-09T04:56:16.928Z",
+  "parser_version": "1.0.0"
+}
