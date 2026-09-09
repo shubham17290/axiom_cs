@@ -1,15 +1,11 @@
 import { extractPDFText, parseGATEFileName, resolveRawPDFPath, listRawPDFFiles } from './pdf-extractor.js';
-import { detectQuestionBoundaries, parseQuestion, extractMarksRanges } from './question-parser.js';
-import { validateQuestion, validateQuestions, getValidationSummary } from './validator.js';
+import { detectQuestionBoundaries, parseQuestion } from './question-parser.js';
+import { validateQuestions, getValidationSummary } from './validator.js';
 import { checkAllDuplicates } from './duplicate-detector.js';
 import { createStagingOutput, writeStagingFile, writeHumanReport, generateHumanReport } from './staging.js';
-import type { ParsedQuestion, PDFExtractResult } from './pdf-extractor.js';
-
-export interface MarksRange {
-  start: number;
-  end: number;
-  marks: number;
-}
+import type { ParsedQuestion } from './question-parser.js';
+import type { PDFExtractResult } from './pdf-extractor.js';
+import type { MarksRange } from './question-parser.js';
 
 export interface PipelineOptions {
   pilotOnly?: boolean;
@@ -33,23 +29,12 @@ export interface PipelineResult {
 function extractMarksRangesFromText(text: string): MarksRange[] {
   const ranges: MarksRange[] = [];
   const lines = text.split('\n');
-  console.log(`[DEBUG] Total lines: ${lines.length}`);
-  console.log(`[DEBUG] Line 4: "${lines[4]?.trim()}"`);
-  console.log(`[DEBUG] Line 61: "${lines[61]?.trim()}"`);
-  
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimmed = line.trim();
     if (!trimmed.toLowerCase().includes('carry')) continue;
-    console.log(`[DEBUG] Processing line ${i}: "${trimmed}"`);
-    
-    // Match patterns like:
-    // "– Q.5 Carry ONE mark Each"
-    // "Q.6 – Q.10 Carry TWO marks Each"
-    // "Q.11 – Q.35 Carry ONE mark each."
-    // "Q.36 – Q.65 Carry TWO mark each."
-    
-    // Try pattern with start and end: "Q.X – Q.Y Carry ..."
+
     let match = trimmed.match(/Q\.\s*(\d+)\s*[–-]\s*Q\.\s*(\d+)\s+Carry\s+(one|two)\s+marks?(?:\s+[Ee]ach)?/i);
     if (match) {
       ranges.push({
@@ -59,11 +44,9 @@ function extractMarksRangesFromText(text: string): MarksRange[] {
       });
       continue;
     }
-    
-    // Try pattern with leading dash: "– Q.Y Carry ..."
+
     match = trimmed.match(/[–-]\s*Q\.\s*(\d+)\s+Carry\s+(one|two)\s+marks?(?:\s+[Ee]ach)?/i);
     if (match) {
-      console.log(`[DEBUG] Matched leading dash: "${trimmed}" -> start=1, end=${match[1]}, marks=${match[2]}`);
       ranges.push({
         start: 1,
         end: parseInt(match[1], 10),
@@ -72,7 +55,7 @@ function extractMarksRangesFromText(text: string): MarksRange[] {
       continue;
     }
   }
-  
+
   return ranges;
 }
 
@@ -91,7 +74,7 @@ export async function runIngestionPipeline(
 
   const boundaries = detectQuestionBoundaries(extractResult.text);
 
-  let questions: ParsedQuestion[] = [];
+  const questions: ParsedQuestion[] = [];
   for (const boundary of boundaries) {
     const question = parseQuestion(
       boundary,
@@ -105,7 +88,7 @@ export async function runIngestionPipeline(
   }
 
   const duplicates = checkAllDuplicates(questions);
-  for (const [identity, indices] of duplicates) {
+  for (const [, indices] of duplicates) {
     for (const idx of indices.slice(1)) {
       questions[idx].warnings.push(`DUPLICATE: Same source identity as question at index ${indices[0]}`);
     }

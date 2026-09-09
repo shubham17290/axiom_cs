@@ -27,6 +27,12 @@ export interface ParsedAnswer {
   rawText: string;
 }
 
+export interface MarksRange {
+  start: number;
+  end: number;
+  marks: number;
+}
+
 export interface QuestionBoundary {
   startIndex: number;
   endIndex: number;
@@ -142,47 +148,8 @@ function extractOptions(text: string): ParsedOption[] {
           const body = match[2].trim();
           if (!options.some(o => o.label === label)) {
             options.push({ label, body, isCorrect: null });
-}
-}
-
-function extractMarks(text: string, questionNumber: number, marksRanges: MarksRange[]): { marks: number | null; negativeMarks: number | null } {
-  let marks: number | null = null;
-  let negativeMarks: number | null = null;
-
-  const oneMarkMatch = text.match(/carry\s+one\s+mark/i);
-  const twoMarkMatch = text.match(/carry\s+two\s+marks?/i);
-
-  if (oneMarkMatch) marks = 1;
-  else if (twoMarkMatch) marks = 2;
-
-  for (const pattern of MARKS_PATTERNS) {
-    const match = text.match(pattern);
-    if (match && match[1]) {
-      const val = parseFloat(match[1]);
-      if (!isNaN(val)) marks = val;
-      break;
-    }
-  }
-
-  if (marks === null && marksRanges.length > 0) {
-    for (const range of marksRanges) {
-      if (questionNumber >= range.start && questionNumber <= range.end) {
-        marks = range.marks;
-        break;
-      }
-    }
-  }
-
-  for (const pattern of NEGATIVE_MARKS_PATTERNS) {
-    const match = text.match(pattern);
-    if (match && match[1]) {
-      negativeMarks = parseFloat(match[1]);
-      break;
-    }
-  }
-
-  return { marks, negativeMarks };
-}
+          }
+        }
       }
     }
   }
@@ -191,10 +158,8 @@ function extractMarks(text: string, questionNumber: number, marksRanges: MarksRa
 }
 
 function extractAnswer(text: string, type: ParsedQuestion['type']): ParsedAnswer | null {
-  const lowerText = text.toLowerCase();
-
   if (type === 'nat') {
-    const numMatch = text.match(/answer\s*(?:is|:)\s*([\d\.\-eE]+)/i);
+    const numMatch = text.match(/answer\s*(?:is|:)\s*([\d.\-eE]+)/i);
     if (numMatch) {
       return {
         type: 'numeric',
@@ -243,7 +208,7 @@ function extractAnswer(text: string, type: ParsedQuestion['type']): ParsedAnswer
   return null;
 }
 
-function extractMarks(text: string, questionNumber: number): { marks: number | null; negativeMarks: number | null } {
+function extractMarks(text: string, questionNumber: number, marksRanges: MarksRange[]): { marks: number | null; negativeMarks: number | null } {
   let marks: number | null = null;
   let negativeMarks: number | null = null;
 
@@ -262,13 +227,11 @@ function extractMarks(text: string, questionNumber: number): { marks: number | n
     }
   }
 
-  if (marks === null) {
-    const qRangeMatch = text.match(/Q\.\s*(\d+)\s*[–-]\s*Q\.\s*(\d+)\s+Carry\s+(one|two)\s+marks?/i);
-    if (qRangeMatch) {
-      const start = parseInt(qRangeMatch[1], 10);
-      const end = parseInt(qRangeMatch[2], 10);
-      if (questionNumber >= start && questionNumber <= end) {
-        marks = qRangeMatch[3].toLowerCase() === 'one' ? 1 : 2;
+  if (marks === null && marksRanges.length > 0) {
+    for (const range of marksRanges) {
+      if (questionNumber >= range.start && questionNumber <= range.end) {
+        marks = range.marks;
+        break;
       }
     }
   }
