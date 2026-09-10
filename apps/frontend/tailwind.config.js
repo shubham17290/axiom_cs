@@ -17,6 +17,13 @@ module.exports = {
           strong: "var(--primary-strong)",
           soft: "var(--primary-soft)",
         },
+        // PREPForge "forge" accent (teal) — PG-STD-01
+        accent: {
+          DEFAULT: "var(--accent)",
+          strong: "var(--accent-strong)",
+          soft: "var(--accent-soft)",
+          ink: "var(--accent-ink)",
+        },
         ink: "var(--text)",
         muted: "var(--muted)",
         success: { DEFAULT: "var(--success)", soft: "var(--success-soft)" },

@@ -20,6 +20,12 @@
   --info: #2b6cb0;
   --border: #e5e5e5;
 
+  /* PREPForge accent (teal "forge" accent, PG-STD-01) */
+  --accent: #0d9488;
+  --accent-strong: #0f766e;
+  --accent-soft: #ccfbf1;
+  --accent-ink: #134e4a;
+
   --radius-sm: 5px;
   --radius-md: 8px;
   --radius-lg: 16px;

@@ -90,7 +90,7 @@ export function TopicsPage() {
                     Preview
                   </button>
                   <Link
-                    href={`/practice?mode=topic&topic_id=${topic.id}`}
+                    href={`/practice?mode=topic&topic_id=${topic.id}&subject_id=${params.subjectId}`}
                     className="touch-target inline-flex items-center rounded-md2 bg-primary px-4 text-sm font-medium text-white"
                   >
                     Practice

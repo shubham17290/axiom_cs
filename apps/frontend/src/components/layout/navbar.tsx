@@ -1,31 +1,33 @@
 "use client";
-// PHASE 5 §6 — global Navbar (guest/student/admin variants) + app shell.
+// PG-STD-01 — PREPForge navbar: forge-accent brand mark + consistent student navigation.
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
+import { BRAND, NAV, ADMIN_NAV } from "@/lib/brand";
 
-const studentLinks = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/subjects", label: "Subjects" },
-  { href: "/practice", label: "Practice" },
-  { href: "/analytics", label: "Analytics" },
-  { href: "/bookmarks", label: "Bookmarks" },
-  { href: "/mistakes", label: "Mistakes" },
-];
+const links = [...NAV, ADMIN_NAV];
 
 export function Navbar() {
   const { user, status, logout } = useAuth();
   const pathname = usePathname();
 
-  const links = user?.role === "admin" || user?.role === "moderator" ? [...studentLinks, { href: "/admin", label: "Admin" }] : studentLinks;
-
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-surface/95 backdrop-blur">
       <nav aria-label="Main" className="mx-auto flex max-w-content items-center gap-2 px-4 py-2 sm:px-8">
-        <Link href="/" className="touch-target flex items-center gap-2 font-bold text-primary">
-          <span aria-hidden="true">🎓</span>
-          <span className="text-base">GATE PYQ</span>
+        <Link href="/" className="touch-target flex items-center gap-2.5 font-bold">
+          <span
+            aria-hidden="true"
+            className="grid size-9 place-items-center rounded-md2 bg-[color:var(--accent)] text-white"
+          >
+            ⚒
+          </span>
+          <span className="flex flex-col leading-tight">
+            <span className="text-base tracking-tight text-ink">{BRAND.name}</span>
+            <span className="hidden text-[10px] font-medium uppercase tracking-widest text-muted sm:inline">
+              GATE CS &amp; IT
+            </span>
+          </span>
         </Link>
 
         {status === "authenticated" && (
@@ -38,7 +40,9 @@ export function Navbar() {
                     href={link.href}
                     aria-current={active ? "page" : undefined}
                     className={`inline-flex h-11 items-center rounded-md2 px-3 text-sm font-medium ${
-                      active ? "bg-[color:var(--primary-soft)] text-primary" : "text-muted hover:text-ink"
+                      active
+                        ? "bg-[color:var(--accent-soft)] text-[color:var(--accent-ink)]"
+                        : "text-muted hover:text-ink"
                     }`}
                   >
                     {link.label}
@@ -54,7 +58,7 @@ export function Navbar() {
             <>
               <Link
                 href="/profile"
-                className="hidden touch-target items-center rounded-full bg-[color:var(--primary-soft)] px-3 text-sm font-medium text-primary sm:inline-flex"
+                className="hidden touch-target items-center rounded-full bg-[color:var(--accent-soft)] px-3 text-sm font-medium text-[color:var(--accent-ink)] sm:inline-flex"
                 aria-label={`Signed in as ${user?.full_name ?? user?.email}`}
               >
                 {(user?.full_name ?? "U").slice(0, 1).toUpperCase()}
@@ -68,7 +72,7 @@ export function Navbar() {
               <Link href="/login" className="touch-target inline-flex items-center px-3 text-sm font-medium text-muted hover:text-ink">
                 Log in
               </Link>
-              <Link href="/register" className="touch-target inline-flex items-center rounded-md2 bg-primary px-3.5 text-sm font-medium text-white hover:bg-[color:var(--primary-strong)]">
+              <Link href="/register" className="touch-target inline-flex items-center rounded-md2 bg-[color:var(--accent)] px-3.5 text-sm font-medium text-white hover:bg-[color:var(--accent-strong)]">
                 Create account
               </Link>
             </>
@@ -86,7 +90,7 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     aria-current={active ? "page" : undefined}
-                    className={`inline-flex h-11 items-center px-3 text-sm font-medium ${active ? "text-primary" : "text-muted"}`}
+                    className={`inline-flex h-11 items-center px-3 text-sm font-medium ${active ? "text-[color:var(--accent)]" : "text-muted"}`}
                   >
                     {link.label}
                   </Link>

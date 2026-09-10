@@ -13,6 +13,18 @@ interface Props {
 export function QuestionOptions({ question, selected, onSelect, disabled, gradedResult }: Props) {
   if (question.type_code === "mcq" || question.type_code === "msq") {
     const multi = question.type_code === "msq";
+
+    // Data guard: if the session payload has no options for this question,
+    // show a clear notice instead of an empty answer surface.
+    if (question.options.length === 0) {
+      return (
+        <p className="rounded-md2 border border-dashed border-line bg-bg px-4 py-6 text-center text-sm text-muted">
+          Options for this question have not been published yet. Use the palette to
+          move to the next question.
+        </p>
+      );
+    }
+
     const currentIds = new Set(
       Array.isArray(selected?.["option_ids"])
         ? (selected?.["option_ids"] as string[])

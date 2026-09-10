@@ -1,12 +1,13 @@
 "use client";
-// PG-STD-DSH — Dashboard: greeting, stat cards, subject bars, weak topics (Phase 5 §9).
+// PG-STD-DSH — PREPForge dashboard: greeting, stat cards, subject bars, weak topics, quick CTAs.
 import Link from "next/link";
 import { useApi } from "@/hooks/use-api";
 import { useAuth } from "@/hooks/use-auth";
-import { analyticsService } from "@/services";
+import { analyticsService, subjectsService } from "@/services";
 import { Card, CardTitle, StatCard } from "@/components/ui/card";
 import { ErrorState, SkeletonList } from "@/components/ui/states";
 import { formatAccuracy, formatSeconds } from "@/utils/format";
+import { BRAND } from "@/lib/brand";
 
 export function DashboardPage() {
   const { user } = useAuth();
@@ -28,13 +29,16 @@ export function DashboardPage() {
     <div className="mx-auto max-w-content px-4 py-8 sm:px-8">
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--accent)]">
+            {BRAND.name}
+          </p>
           <h1 className="text-2xl font-bold">Hi {(user?.full_name ?? "there").split(" ")[0]} 👋</h1>
           <p className="text-sm text-muted">Here is your preparation at a glance.</p>
         </div>
         {lastSession && lastSession.status === "in_progress" && (
           <Link
             href={`/practice/${lastSession.id}`}
-            className="touch-target inline-flex items-center rounded-md2 bg-primary px-4 py-2 text-sm font-medium text-white"
+            className="touch-target inline-flex items-center rounded-md2 bg-[color:var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[color:var(--accent-strong)]"
           >
             Resume last session →
           </Link>
@@ -47,6 +51,28 @@ export function DashboardPage() {
         <StatCard label="Avg time / Q" value={formatSeconds(overview?.avg_time_s)} />
         <StatCard label="Streak" value={`${overview?.streak_days ?? 0}d`} sub={overview && overview.streak_days > 0 ? "Keep it going!" : undefined} />
       </div>
+
+      {/* Quick actions — keep the demo flow one click away (PG-STD-01). */}
+      <nav aria-label="Quick actions" className="mt-6 flex flex-wrap gap-2">
+        <Link
+          href="/practice"
+          className="touch-target inline-flex items-center gap-1.5 rounded-md2 bg-[color:var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[color:var(--accent-strong)]"
+        >
+          ⚡ Start practice
+        </Link>
+        <Link
+          href="/subjects"
+          className="touch-target inline-flex items-center gap-1.5 rounded-md2 border border-line bg-surface px-4 py-2 text-sm font-medium text-ink hover:border-primary"
+        >
+          📚 Browse subjects
+        </Link>
+        <Link
+          href="/mistakes"
+          className="touch-target inline-flex items-center gap-1.5 rounded-md2 border border-line bg-surface px-4 py-2 text-sm font-medium text-ink hover:border-primary"
+        >
+          ✨ Review mistakes
+        </Link>
+      </nav>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <Card>
@@ -117,7 +143,6 @@ export function BarList({
 }: {
   items: Array<{ id: string; label: string; accuracy: number; attempts: number; href?: string }>;
 }) {
-  // Accessible horizontal bars (Phase 5 §9: bar lists over chart clutter).
   return (
     <ul className="flex flex-col gap-3">
       {items.map((item) => {
@@ -126,7 +151,7 @@ export function BarList({
           <li key={item.id}>
             <div className="mb-1 flex items-center justify-between text-sm">
               {item.href ? (
-                <Link href={item.href} className="font-medium hover:text-primary">{item.label}</Link>
+                <Link href={item.href} className="font-medium hover:text-[color:var(--accent)]">{item.label}</Link>
               ) : (
                 <span className="font-medium">{item.label}</span>
               )}
@@ -153,7 +178,7 @@ function EmptyHint({ text, href, cta }: { text: string; href: string; cta: strin
   return (
     <p className="rounded-md2 border border-dashed border-line px-4 py-6 text-center text-sm text-muted">
       {text}{" "}
-      <Link href={href} className="font-medium text-primary">{cta}</Link>
+      <Link href={href} className="font-medium text-[color:var(--accent)]">{cta}</Link>
     </p>
   );
 }
